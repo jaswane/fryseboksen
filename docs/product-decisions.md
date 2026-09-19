@@ -16,7 +16,7 @@ Godkjent 19. september 2026. Frontend-prototypen bygges i det kanoniske reposito
 10. Hele tellbare enheter. Ingen desimaler eller enhetskonvertering.
 11. Bruk dette først baseres på eldste registrerte innfrysingsdato. Ingen utløpsdato, mattrygghetsvurdering eller faresignaler. Senere holdbarhetsstoff er redaksjonelt/kildebelagt.
 12. Visuell retning: stram, nordisk premium, kjølig palett, presis typografi og luft. Ingen kopiering av Polestars identitet/proprietære font.
-13. Instrument Sans, Inter og IBM Plex Sans sammenlignes med norsk innhold før endelig valg. Instrument Sans er første kandidat.
+13. Instrument Sans er valgt etter visuell sammenligning med Inter og IBM Plex Sans på desktop og mobil, med faktiske norske overskrifter, varenavn, datoer og antall. Sammenligningen beholdes på /design/typografi. Alle fontene lastes lokalt og lisensene bevares.
 14. Landingsside med prerendrede stillbilder/korte MP4-/WebM-klipp og HTML/CSS-overlays. Ingen WebGL, Three.js eller kontinuerlig scroll-scrubbing. Respekter redusert bevegelse. Foreløpige stillbilder brukes i prototypen.
 15. Ett kanonisk Git-repository i C:\_Nettsider\fryseboksen, åpnet direkte i Claude Code senere. Ingen separat prototype/Astra-mappe.
 16. Månedlig anbefalt påminnelsesfrekvens ved aktivt valg; ukentlig/av senere. Prototype sender ingenting.
@@ -37,4 +37,3 @@ Komplett frontend: historie, demoapp, tomtilstand, støttesider og fontprøve. I
 ## Godkjenningskrav
 
 Lint, typecheck, build, desktop/mobil, add/edit/delete/search/sort, flere innfrysingsdatoer, pluss/minus/angre, tomtilstand, overflow, console, tastatur/fokus, redusert bevegelse og gjennomlest Git-diff.
-
