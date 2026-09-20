@@ -56,7 +56,8 @@ src/components/story/          Scroll-historie, mediekontrakt og mobilillustrasj
 src/components/ui/             Tilgjengelig dialog
 src/features/inventory/        Domene, adapterkontrakt, lokal adapter og app
 src/features/inventory/components/  Legg til, samlet varelinje og Rediger
-public/media/                  Originale foreløpige fryserillustrasjoner
+public/media/freezer-scroll/   Transparent scrollsekvens, desktop og mobil
+assets/freezer/                Blender-modell, render-/eksportskript og medierevisjoner
 public/licenses/               Fontlisenser
 tests/e2e/                     Nettlesertester av produktflyter og tilgjengelighet
 docs/                          Beslutninger, arkitektur, design og QA
@@ -73,4 +74,4 @@ Start videre integrasjon i `src/features/inventory/adapter.ts` og les arkitektur
 
 ## Leveransegrenser
 
-Ikke push eller deploy uten en ny instruksjon. Ferdige fryserfilmer, ekte autentisering og backend er senere arbeid. Kontaktadressen hører kun til hovedinnholdet på kontaktsiden og skal aldri gjentas i globale komponenter, metadata eller schema.
+Ikke push eller deploy uten en ny instruksjon. Ekte autentisering og backend er senere arbeid. Landingssiden har nå en lokal Blender-basert scrollsekvens; se mediearkitekturen og `assets/freezer/scroll-v2/README.md`. Kontaktadressen hører kun til hovedinnholdet på kontaktsiden og skal aldri gjentas i globale komponenter, metadata eller schema.

@@ -1,0 +1,99 @@
+{
+  "dimensions_cm": {
+    "width": 85,
+    "height": 77,
+    "depth": 56
+  },
+  "nominal_net_litres": 198,
+  "baskets": 2,
+  "quality": "final",
+  "shots": {
+    "closed": {
+      "file": "closed.png",
+      "width": 2400,
+      "height": 2400,
+      "camera": "CAMERA | closed hero",
+      "lid_degrees": 0,
+      "anchors": {
+        "beef": {
+          "x": 714.7,
+          "y": 965.3
+        },
+        "salmon": {
+          "x": 1687.1,
+          "y": 926.0
+        },
+        "berries": {
+          "x": 1505.0,
+          "y": 764.9
+        },
+        "lasagne": {
+          "x": 1291.1,
+          "y": 903.3
+        },
+        "bread": {
+          "x": 1108.9,
+          "y": 743.8
+        }
+      }
+    },
+    "open": {
+      "file": "open.png",
+      "width": 2400,
+      "height": 2400,
+      "camera": "CAMERA | shared open story",
+      "lid_degrees": 95,
+      "anchors": {
+        "beef": {
+          "x": 815.7,
+          "y": 1337.0
+        },
+        "salmon": {
+          "x": 1585.6,
+          "y": 1290.9
+        },
+        "berries": {
+          "x": 1463.0,
+          "y": 1086.9
+        },
+        "lasagne": {
+          "x": 1261.3,
+          "y": 1345.1
+        },
+        "bread": {
+          "x": 1138.7,
+          "y": 1142.1
+        }
+      }
+    },
+    "filled": {
+      "file": "filled.png",
+      "width": 2400,
+      "height": 2400,
+      "camera": "CAMERA | shared open story",
+      "lid_degrees": 95,
+      "anchors": {
+        "beef": {
+          "x": 815.7,
+          "y": 1337.0
+        },
+        "salmon": {
+          "x": 1585.6,
+          "y": 1290.9
+        },
+        "berries": {
+          "x": 1463.0,
+          "y": 1086.9
+        },
+        "lasagne": {
+          "x": 1261.3,
+          "y": 1345.1
+        },
+        "bread": {
+          "x": 1138.7,
+          "y": 1142.1
+        }
+      }
+    }
+  }
+}

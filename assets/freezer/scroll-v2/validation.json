@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "frames": 73,
+  "source_size": [
+    1920,
+    1080
+  ],
+  "desktop_size": [
+    1440,
+    810
+  ],
+  "mobile_size": [
+    810,
+    810
+  ],
+  "total_web_bytes": 5887434,
+  "max_camera_step_m": 0.14994068866590285,
+  "all_product_bounds_inside_frame": true,
+  "all_frames_have_alpha": true,
+  "lid_open_from_frame": 49,
+  "lid_degrees_open": 95
+}

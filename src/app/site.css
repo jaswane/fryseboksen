@@ -217,13 +217,12 @@
   justify-content: center;
 }
 .hero-art .scene-media {
-  width: 110%;
-  margin: -30px 0 -25px -5%;
+  width: min(100%, calc(100svh - 235px));
+  align-self: flex-end;
+  margin: 16px 0;
 }
 .hero-art-label {
-  position: absolute;
-  top: 35px;
-  right: 0;
+  text-align: right;
   font-size: 0.62rem;
   letter-spacing: 0.14em;
   color: #536a73;
@@ -234,11 +233,10 @@
   justify-content: space-between;
   font-size: 0.7rem;
   color: #536a73;
-  padding: 0 4% 0 8%;
+  padding: 0;
 }
 .scene-media {
   position: relative;
-  aspect-ratio: 9 / 7;
 }
 .scene-poster {
   display: block;
@@ -255,8 +253,26 @@
   opacity: 0;
   transition: opacity 0.25s;
 }
-.scene-video.is-playing {
+.scene-video.has-frame {
   opacity: 1;
+}
+.scene-playback {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #d9e1e3;
+  border-radius: 2px;
+  background: #f3f5f4f2;
+  color: #33515d;
+  font-size: 0.72rem;
+}
+.scene-playback:hover {
+  background: #fff;
 }
 .hero-bottom {
   border-top: 1px solid #d9e1e3;
@@ -335,7 +351,7 @@
 }
 .freezer-visual {
   position: relative;
-  width: 115%;
+  width: 100%;
   flex-shrink: 0;
 }
 .freezer-visual .scene-media {
@@ -366,16 +382,16 @@
   background: #9cb1b6;
 }
 .label-beef {
-  left: 40%;
-  top: 39%;
+  left: 35%;
+  top: 36%;
 }
-.label-salmon {
-  left: 59%;
-  top: 33%;
+.label-lasagne {
+  left: 44%;
+  top: 57%;
 }
 .label-berries {
-  left: 63%;
-  top: 51%;
+  left: 76%;
+  top: 54%;
 }
 .unknown {
   font-size: 20px;
@@ -408,7 +424,7 @@
 .stage-2 .known {
   display: block;
 }
-.stage-1 .label-salmon {
+.stage-1 .label-lasagne {
   transition-delay: 0.08s;
 }
 .stage-1 .label-berries {
@@ -992,11 +1008,11 @@
     margin-top: 12px;
   }
   .hero-art {
-    margin: -12px 0 0;
+    margin: 8px 0 0;
   }
   .hero-art .scene-media {
     width: 100%;
-    margin: -25px 0 -35px;
+    margin: 8px 0 14px;
   }
   .hero-art-label {
     display: none;
@@ -1040,7 +1056,7 @@
   }
   .story-mobile-visual {
     display: block;
-    margin: 0 -5%;
+    margin: 24px 0;
   }
   .story-mobile-visual .freezer-visual {
     width: 100%;

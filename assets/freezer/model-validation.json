@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "measured_closed_dimensions_cm": {
+    "width": 85.0,
+    "depth": 56.0,
+    "height": 77.0
+  },
+  "basket_count": 2,
+  "closed_lid_basket_triangle_intersections": {
+    "BASKET LEFT | moulded lattice": 0,
+    "BASKET RIGHT | moulded lattice": 0
+  },
+  "ambient_occlusion_material_nodes": 4,
+  "render_engine": "CYCLES",
+  "cameras": {
+    "closed": {
+      "projection": "PERSP",
+      "lens_mm": 52.0,
+      "width_fraction": 0.892,
+      "height_fraction": 0.9,
+      "frame_bounds": [
+        0.05397564545273781,
+        0.9460241794586182,
+        0.050000499933958054,
+        0.9500002264976501
+      ],
+      "product_clipped": false
+    },
+    "open": {
+      "projection": "PERSP",
+      "lens_mm": 52.0,
+      "width_fraction": 0.6589,
+      "height_fraction": 0.88,
+      "frame_bounds": [
+        0.17054200172424316,
+        0.8294587135314941,
+        0.060000162571668625,
+        0.9399999976158142
+      ],
+      "product_clipped": false
+    }
+  },
+  "lights": [
+    {
+      "name": "Softbox | broad warm key",
+      "watts": 380.0
+    },
+    {
+      "name": "Softbox | cool fill",
+      "watts": 60.0
+    },
+    {
+      "name": "Softbox | rear edge",
+      "watts": 220.0
+    }
+  ],
+  "animation_authored": false,
+  "note": "198 L is the supplied nominal specification; this is a visual reconstruction, not a capacity certification."
+}

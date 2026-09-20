@@ -1,0 +1,115 @@
+{
+  "revision": "v2-perspective",
+  "dimensions_cm": {
+    "width": 85,
+    "height": 77,
+    "depth": 56
+  },
+  "nominal_net_litres": 198,
+  "baskets": 2,
+  "quality": "final",
+  "shots": {
+    "closed": {
+      "file": "closed.png",
+      "width": 2400,
+      "height": 2400,
+      "camera": "CAMERA | closed hero",
+      "camera_type": "PERSP",
+      "focal_length_mm": 52.0,
+      "sensor_width_mm": 36.0,
+      "location": [0.9698420166969299, -1.2380969524383545, 1.318572998046875],
+      "shift": [0.0100509999319911, -0.047905001789331436],
+      "lid_degrees": 0,
+      "anchors": {
+        "beef": {
+          "x": 904.8,
+          "y": 591.2
+        },
+        "salmon": {
+          "x": 1516.1,
+          "y": 1069.1
+        },
+        "berries": {
+          "x": 1749.1,
+          "y": 850.7
+        },
+        "lasagne": {
+          "x": 1045.7,
+          "y": 755.2
+        },
+        "bread": {
+          "x": 1297.1,
+          "y": 573.2
+        }
+      }
+    },
+    "open": {
+      "file": "open.png",
+      "width": 2400,
+      "height": 2400,
+      "camera": "CAMERA | shared open story",
+      "camera_type": "PERSP",
+      "focal_length_mm": 52.0,
+      "sensor_width_mm": 36.0,
+      "location": [0.9743620157241821, -1.4359019994735718, 2.5261590480804443],
+      "shift": [0.03994100168347359, 0.02073800005018711],
+      "lid_degrees": 95,
+      "anchors": {
+        "beef": {
+          "x": 893.8,
+          "y": 1133.8
+        },
+        "salmon": {
+          "x": 1338.6,
+          "y": 1620.7
+        },
+        "berries": {
+          "x": 1482.0,
+          "y": 1417.5
+        },
+        "lasagne": {
+          "x": 1027.0,
+          "y": 1391.0
+        },
+        "bread": {
+          "x": 1178.6,
+          "y": 1200.7
+        }
+      }
+    },
+    "filled": {
+      "file": "filled.png",
+      "width": 2400,
+      "height": 2400,
+      "camera": "CAMERA | shared open story",
+      "camera_type": "PERSP",
+      "focal_length_mm": 52.0,
+      "sensor_width_mm": 36.0,
+      "location": [0.9743620157241821, -1.4359019994735718, 2.5261590480804443],
+      "shift": [0.03994100168347359, 0.02073800005018711],
+      "lid_degrees": 95,
+      "anchors": {
+        "beef": {
+          "x": 893.8,
+          "y": 1133.8
+        },
+        "salmon": {
+          "x": 1338.6,
+          "y": 1620.7
+        },
+        "berries": {
+          "x": 1482.0,
+          "y": 1417.5
+        },
+        "lasagne": {
+          "x": 1027.0,
+          "y": 1391.0
+        },
+        "bread": {
+          "x": 1178.6,
+          "y": 1200.7
+        }
+      }
+    }
+  }
+}

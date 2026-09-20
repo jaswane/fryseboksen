@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "videos": [
+    {
+      "file": "fryseboksen-opening-questions.mp4",
+      "codec": "h264",
+      "dimensions": [
+        1080,
+        1080
+      ],
+      "duration_seconds": 4.0,
+      "fps": 24.0,
+      "decoded_frames": 96,
+      "sampled_mean_absolute_error_8bit": [
+        0.915,
+        0.989,
+        1.145,
+        1.211,
+        1.178,
+        1.171
+      ],
+      "bytes": 782161
+    },
+    {
+      "file": "fryseboksen-opening-questions.webm",
+      "codec": "vp9",
+      "dimensions": [
+        1080,
+        1080
+      ],
+      "duration_seconds": 4.0,
+      "fps": 24.0,
+      "decoded_frames": 96,
+      "sampled_mean_absolute_error_8bit": [
+        0.908,
+        1.046,
+        1.264,
+        1.341,
+        1.342,
+        1.295
+      ],
+      "bytes": 371792
+    },
+    {
+      "file": "fryseboksen-opening-clean.mp4",
+      "codec": "h264",
+      "dimensions": [
+        1080,
+        1080
+      ],
+      "duration_seconds": 4.0,
+      "fps": 24.0,
+      "decoded_frames": 96,
+      "sampled_mean_absolute_error_8bit": [
+        0.915,
+        0.989,
+        1.147,
+        1.213,
+        1.167,
+        1.16
+      ],
+      "bytes": 775820
+    },
+    {
+      "file": "fryseboksen-opening-clean.webm",
+      "codec": "vp9",
+      "dimensions": [
+        1080,
+        1080
+      ],
+      "duration_seconds": 4.0,
+      "fps": 24.0,
+      "decoded_frames": 96,
+      "sampled_mean_absolute_error_8bit": [
+        0.908,
+        1.046,
+        1.264,
+        1.339,
+        1.331,
+        1.285
+      ],
+      "bytes": 363449
+    }
+  ],
+  "late_lid_luminance_range": [
+    216,
+    216
+  ],
+  "largest_adjacent_lid_luminance_change": 0,
+  "note": "Pixel checks supplement visual inspection and playback review."
+}

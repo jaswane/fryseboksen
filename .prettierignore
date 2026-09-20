@@ -7,3 +7,17 @@ test-results
 coverage
 work
 public
+assets/freezer/previews
+assets/freezer/review-preview
+assets/freezer/renders
+assets/freezer/stills-v1/overlays/*.svg
+assets/freezer/stills-v2/overlays/*.svg
+assets/freezer/animation-v1/frames
+assets/freezer/animation-v1/preview-frames
+assets/freezer/animation-v1/composited-frames
+assets/freezer/animation-v1/preview-composited
+assets/freezer/scroll-v2/frames
+assets/freezer/scroll-v2/preview-frames
+src/components/story/scroll-anchors.json
+assets/freezer/scroll-v2/timeline.json
+assets/freezer/scroll-v2/validation.json

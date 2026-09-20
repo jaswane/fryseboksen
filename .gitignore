@@ -10,4 +10,7 @@ test-results/
 .DS_Store
 *.log
 work/
+assets/freezer/scroll-v2/frames/
+assets/freezer/scroll-v2/preview-frames/
+assets/freezer/scroll-v2/*.blend1
 

@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "checked_images": [
+    "01-hero-closed.png",
+    "01-hero-closed.webp",
+    "01-hero-closed-1200.webp",
+    "02-open-two-baskets.png",
+    "02-open-two-baskets.webp",
+    "02-open-two-baskets-1200.webp",
+    "03-open-questions.png",
+    "03-open-questions.webp",
+    "03-open-questions-1200.webp",
+    "04-open-overview.png",
+    "04-open-overview.webp",
+    "04-open-overview-1200.webp",
+    "05-open-content-clean.png",
+    "05-open-content-clean.webp",
+    "05-open-content-clean-1200.webp"
+  ],
+  "composites": {
+    "questions": "exact match to the same base render plus the supplied overlay",
+    "overview": "exact match to the same base render plus the supplied overlay"
+  },
+  "animation_files": []
+}

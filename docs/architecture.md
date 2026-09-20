@@ -61,9 +61,33 @@ Kontosletting får en eksplisitt serverflyt; vurder eierskifte før deling. Slet
 
 ## Mediearkitektur
 
-En scene-konfigurasjon beskriver posterbilder, mobil/desktop og eventuelle fremtidige videokilder. Mediekomponenten håndterer synlighet, redusert bevegelse, feil og utsatt lasting. Tekster og etiketter er HTML. Ingen video følger scrollposisjon kontinuerlig.
+### Gjeldende løsning: reversibel scroll, 20. september 2026
 
-Bytt `poster`/`mobilePoster` og eventuelt `sources`/`mobileSources` i `src/components/story/media-config.ts`. Video lastes først nær viewport, spiller uten lyd og uten løkke, og statisk bilde beholdes ved redusert bevegelse eller avspillingsfeil. Kun én video kan spille om gangen. Desktop bruker diskrete sceneskift med en sticky illustrasjon; mobil har en illustrasjon per scene. Mediekontrakten er forberedt, men ekte MP4/WebM-filer og avspillings-QA inngår i senere medieproduksjon.
+Brukerens siste revisjon erstatter avgrensningen mot scrollstyring. `freezer-story.tsx` samler punkt 1–4 rundt én sticky fryser. Desktop har 16:9-flate ved siden av teksten; mobil har et kvadratisk mediefelt over teksten. Sidens eksisterende blågrå `#E8EFEE` er bakgrunn gjennom hele fortellingen.
+
+`scroll-timeline.ts` beregner ønsket bilde direkte fra seksjonenes posisjon i dokumentet. Bilde 1 er lukket, 49 er åpent, og 73 er rett forfra. Mellom punkt 2 og 3 holdes bilde 49, mens HTML-etiketter skifter fra spørsmålstegn til navn. Mellom 3 og 4 dreies kameraet. Scroll opp bruker nøyaktig samme beregning baklengs, uten tidsstyrt avspilling, scroll-låsing eller ekstra treghet.
+
+`scene-media.tsx` laster og dekoder ønsket WebP før bildet byttes. Nærmeste nabobilder forberedes; siste komplette bilde beholdes ved feil eller rask scroll. Utdaterte asynkrone svar får ikke skrive over nyere scrollposisjoner. Mediebeskrivelsen ligger i `media-config.ts`. De genererte Blender-ankrene i `scroll-anchors.json` holder HTML-etikettene ved riktig matvare under kamerabevegelsen.
+
+Gjennomsiktig WebP-sekvens er valgt fordi samme prerendrede 3D-modell kan vises presist begge veier og legges direkte over CSS-bakgrunnen. Ingen videokodek med alpha er nødvendig, og ingen WebGL, Three.js eller canvas brukes. Masterne er Full HD 1920 × 1080; nettutgavene er 1440 × 810 / 810 × 810. Mobileksporten fjerner det tomme tekstområdet til venstre, ikke produktet. Nettleseren bruker kun varianten som passer skjermen. Bare faktiske scrollendringer oppdaterer visningen, via én requestAnimationFrame per hendelsesrunde.
+
+`prefers-reduced-motion` og JavaScript avslått gir separate stillbilder per seksjon. Tekst, CTA-er og innhold er serverrendret. `journey.css` eier den nye layouten; prototypeklassene i `site.css` er ikke avhengigheter for scrollberegningen.
+
+Blender-kilde, emballasje, kameraprogram, eksport og geometrisk validering finnes under `assets/freezer/scroll-v2` og tilhørende Python-skript. Den opprinnelige godkjente masteren og V1-filmene er bevart. Endringer i geometri/kamera/lys skal eksporteres som en ny revisjon slik at ferdigrendrede bilder ikke blandes med gamle.
+
+### Historikk: den første videotesten
+
+Bytt `poster`/`mobilePoster` og eventuelt `sources`/`mobileSources` i `src/components/story/media-config.ts`. Video lastes først når minst 25 % av medieflaten er synlig, spiller uten lyd og uten løkke, og statisk bilde beholdes ved redusert bevegelse eller avspillingsfeil. Video pauser utenfor viewport og beholder sluttbildet ved retur. Pause/fortsett/replay er tilgjengelig med tastatur. Kun én video kan spille om gangen. Desktop bruker diskrete sceneskift med en sticky illustrasjon; mobil har en illustrasjon per scene.
+
+### Første lokale animasjonstest, 20. september 2026 (erstattet)
+
+Hero bruker firesekundersklippet fra `assets/freezer/animation-v1`, kopiert til `public/media/freezer` som WebM og MP4. MP4 er førstevalg etter avspillingskontroll i WebKit; WebM følger som alternativ kilde. Startbildet er den godkjente hero-vinkelen. Dette prøveklippet har spørsmålstegn bakt inn; historien bruker det rene sluttbildet med HTML-etiketter. Neste medieversjon kan bruke det rene klippet og `overlay-track.json` for HTML-markører også under bevegelsen. Ingen backend, canvas, WebGL eller scroll-scrubbing er lagt til.
+
+Mediene vises kvadratisk med `object-fit: contain`, uten ytterligere beskjæring. Desktopstørrelsen tilpasses også skjermhøyden. Dette gjenoppretter ikke innhold som mangler i selve renderingen: det åpne lokket går fortsatt ut over øvre bildekant. Den grå studiobakgrunnen er beholdt slik at den kan vurderes ærlig mot sidens `#F3F5F4` og historieseksjonens `#E8EFEE`.
+
+Neste Blender-revisjon etter vurdering på siden: mer luft rundt hele lokkbevegelsen; lysere/matchet studiobakgrunn med de myke skyggene bevart; gjennomsiktig lukket boks til bær, gjennomsiktig pose rundt brød og lokk/emballasje på lasagnen. Ingen matgeometri eller nye renderinger er laget i denne integrasjonstesten.
+
+Verifisert lokalt: lint, typecheck, produksjonsbygg og formatering av endrede filer; 18 målrettede Playwright-kontroller på desktop Edge, mobil Chromium og mobil WebKit. Kontrollene dekker avspilling én gang, bevart sluttbilde, tastaturstyrt replay/pause, redusert bevegelse uten videonedlasting, sceneskift, ruter, tilgjengelighet, konsoll og horisontal overflow. Desktop og 390 px mobilbredde er også vurdert visuelt i nettleseren. Ingen push eller deploy.
 
 ## Kilder
 

@@ -249,11 +249,8 @@ test("story changes from questions to named food and oldest-first", async ({ pag
     await section.evaluate((element) =>
       element.scrollIntoView({ block: "center", behavior: "instant" }),
     );
-    const visual =
-      page.viewportSize()!.width > 760
-        ? page.locator(".story-sticky .freezer-visual")
-        : section.locator(".freezer-visual");
-    await expect(visual).toHaveClass(`freezer-visual stage-${stage}`);
+    const visual = page.locator(".journey-stage .scroll-freezer");
+    await expect(visual).toHaveAttribute("data-stage", String(stage + 1));
     if (stage === 0) await expect(visual.locator(".unknown").first()).toBeVisible();
     if (stage === 1) await expect(visual.locator(".known").first()).toContainText("Kjøttdeig");
     if (stage === 2) await expect(visual.locator(".oldest-label")).toHaveCSS("opacity", "1");

@@ -29,6 +29,8 @@ Fontene er åpne (SIL OFL), distribueres lokalt via Fontsource og lisensene er b
 
 Bakgrunn #F3F5F4, flate #FFFFFF, tekst #172125, sekundærtekst #4F6067 og #536A73, aksent #335D6B, linje #D9E1E3. Prioriterte varer ligger på en dempet grønn/grå flate, uten faresignalering. Mørk produktseksjon bruker lys tekst. De lyseste sekundærtekstene ble mørknet etter faktisk kontrastkontroll.
 
+Fortellingen i punkt 1–4 bruker den eksisterende blågrå flaten #E8EFEE sammenhengende. Fryseren har ekte alpha og en dempet kontaktskygge, slik at ingen rektangulær studiobakgrunn må matches med CSS.
+
 Avstandsskala 4/8/12/16/24/32/48/64/96 px. Primærtekst 16–18 px i app, 18–20 px på forside. Primærknapper og pluss/minus har trykkflater på minst 44 px. Skriftvekter 400–600.
 
 ## Tilgjengelighet
@@ -41,4 +43,4 @@ Pluss/minus har eksplisitte tilgjengelige navn. Hjelpeteksten sier at minus tar 
 
 ## Illustrasjoner
 
-Foreløpige stillbilder/illustrasjoner er eksplisitt prototypeassets. Sluttproduksjon erstattes gjennom mediekonfigurasjonen. Ingen ferdige filmer denne sprinten.
+Blender-modellen brukes konsekvent gjennom en transparent 16:9-sekvens. Hele lokket skal være innenfor bildekanten i samtlige posisjoner. Mobil bruker eget kvadratisk utsnitt av samme rendering. Posene og beholderne er umerkede og gjennomsiktige nok til at matvarene kan gjenkjennes. Prerendrede bilder styres av scroll etter brukerens revisjon 20. september; stillbilder brukes ved redusert bevegelse. Dette er fortsatt lokal medieproduksjon for prototypen.

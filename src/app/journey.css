@@ -1,0 +1,272 @@
+/* One persistent freezer across points 01–04. The artwork itself has alpha. */
+.freezer-journey {
+  position: relative;
+  background: #e8efee;
+  isolation: isolate;
+  /* End the artwork at point 04 without changing the sticky scroll container. */
+  overflow: clip;
+}
+.journey-stage {
+  position: sticky;
+  top: 0;
+  height: calc(100svh - 96px);
+  margin-bottom: calc(-100svh + 96px);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.journey-media {
+  width: min(100%, calc((100svh - 96px) * 16 / 9));
+  max-width: 1920px;
+}
+.scroll-freezer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+.scroll-frame {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.journey-copy {
+  position: relative;
+}
+.journey-section {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 70px var(--page-gutter);
+  max-width: 1920px;
+  margin: auto;
+}
+.journey-hero {
+  min-height: calc(100svh - 96px);
+  padding-top: 36px;
+  padding-bottom: 40px;
+}
+.journey-text {
+  width: 43%;
+  max-width: 680px;
+}
+.journey-text h1 {
+  font-size: clamp(3.3rem, 5.75vw, 6.5rem);
+  font-weight: 500;
+  letter-spacing: -0.057em;
+  line-height: 1.035;
+  margin: 26px 0;
+}
+.journey-text h1 span {
+  color: #5b747d;
+}
+.journey-text h2 {
+  font-size: clamp(2.75rem, 4.2vw, 4.75rem);
+  line-height: 1.06;
+  letter-spacing: -0.05em;
+  font-weight: 500;
+  margin: 30px 0 26px;
+}
+.journey-scroll-note {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 38px;
+  font-size: 0.74rem;
+  color: #536a73;
+}
+.journey-text .story-note {
+  margin-top: 32px;
+}
+.journey-art-label {
+  position: absolute;
+  top: 32px;
+  right: var(--page-gutter);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: #536a73;
+}
+.journey-progress {
+  position: absolute;
+  bottom: 30px;
+  right: var(--page-gutter);
+  display: flex;
+  gap: 18px;
+}
+.journey-progress span {
+  border-top: 1px solid #bdcdce;
+  width: 40px;
+  padding-top: 12px;
+  font-size: 0.67rem;
+  color: #657b82;
+}
+.journey-progress .active {
+  border-color: #335d6b;
+  color: #172125;
+}
+.journey-static {
+  display: none;
+}
+.scroll-labels {
+  position: absolute;
+  inset: 0;
+}
+.scroll-labels .food-label {
+  left: var(--marker-x);
+  transform: translate(-50%, calc(-100% - 20px));
+  transition: opacity 0.18s;
+}
+.scroll-labels .food-label::after {
+  height: 20px;
+}
+.scroll-labels .unknown {
+  display: block;
+}
+.scroll-labels .known {
+  display: none;
+}
+.scroll-labels.stage-0 {
+  visibility: hidden;
+}
+.scroll-labels.stage-1 .food-label,
+.scroll-labels.stage-2 .food-label {
+  opacity: 1;
+}
+.scroll-labels.stage-1 .unknown {
+  display: block;
+}
+.scroll-labels.stage-1 .known {
+  display: none;
+}
+.scroll-labels.stage-2 .unknown {
+  display: none;
+}
+.scroll-labels.stage-2 .known {
+  display: block;
+}
+.scroll-labels.stage-3 .food-label {
+  opacity: 0;
+}
+.scroll-labels .oldest-label {
+  left: var(--marker-x);
+  top: auto;
+  transform: translate(-50%, calc(-100% - 22px));
+  opacity: 0;
+}
+.scroll-labels.stage-3 .oldest-label {
+  opacity: 1;
+}
+.scroll-labels.stage-2 .oldest-label {
+  opacity: 0;
+}
+@media (max-width: 760px) {
+  .journey-stage {
+    height: 44svh;
+    margin-bottom: -44svh;
+    align-items: center;
+    z-index: 2;
+    background: #e8efee;
+  }
+  .journey-media {
+    width: min(100%, 44svh);
+  }
+  .scroll-freezer {
+    aspect-ratio: 1;
+  }
+  .scroll-frame {
+    aspect-ratio: 1;
+  }
+  .journey-art-label,
+  .journey-progress {
+    display: none;
+  }
+  .journey-section {
+    min-height: 105svh;
+    display: block;
+    padding: calc(44svh + 28px) var(--page-gutter) 50px;
+  }
+  .journey-text {
+    width: 100%;
+    max-width: none;
+  }
+  .journey-text h1 {
+    font-size: clamp(2.8rem, 11.6vw, 4.6rem);
+    margin: 20px 0;
+    line-height: 1.01;
+  }
+  .journey-text h2 {
+    font-size: clamp(2.45rem, 9.8vw, 3.6rem);
+    margin: 22px 0;
+  }
+  .journey-text .eyebrow {
+    font-size: 0.62rem;
+  }
+  .journey-text .hero-intro {
+    font-size: 1rem;
+  }
+  .journey-text .hero-actions {
+    gap: 22px;
+  }
+  .journey-text .hero-actions .button {
+    padding: 13px 19px;
+    min-height: 48px;
+    font-size: 0.87rem;
+  }
+  .journey-scroll-note {
+    margin-top: 22px;
+  }
+  .scroll-labels .food-label,
+  .scroll-labels .oldest-label {
+    left: var(--mobile-x);
+  }
+  .scroll-labels .oldest-label {
+    padding: 12px;
+  }
+  .scroll-labels .oldest-label strong {
+    font-size: 0.9rem;
+  }
+  .scroll-labels .oldest-label small {
+    font-size: 0.62rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .journey-stage,
+  .journey-scroll-note {
+    display: none;
+  }
+  .journey-static {
+    display: block;
+    width: 57%;
+  }
+  .journey-section {
+    min-height: 75svh;
+  }
+  .journey-static .scroll-freezer {
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+  .journey-static .scroll-frame {
+    width: 177.777%;
+    max-width: none;
+    margin-left: -77.777%;
+  }
+  .journey-static .scroll-labels .food-label,
+  .journey-static .scroll-labels .oldest-label {
+    left: var(--mobile-x);
+  }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 760px) {
+  .journey-section {
+    padding-top: 38px;
+    min-height: auto;
+  }
+  .journey-static {
+    width: 100%;
+    margin-top: 24px;
+  }
+  .journey-static .scroll-frame {
+    width: 100%;
+    margin: 0;
+  }
+}

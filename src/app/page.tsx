@@ -1,57 +1,13 @@
 import Link from "next/link";
-import { ArrowDown, ArrowRight, ArrowUpRight, Bell, Check, Minus, Plus } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Bell, Check, Minus, Plus } from "lucide-react";
 import { SiteFooter, SiteHeader } from "@/components/site/chrome";
 import { FreezerStory } from "@/components/story/freezer-story";
 import { PhonePreview } from "@/components/story/phone-preview";
-import { SceneMedia } from "@/components/story/scene-media";
-import { sceneMedia } from "@/components/story/media-config";
 export default function HomePage() {
   return (
     <>
       <SiteHeader />
       <main id="main" tabIndex={-1}>
-        <section className="hero" aria-labelledby="hero-title">
-          <div className="hero-copy">
-            <p className="eyebrow">
-              <span>01 /</span> FOR DET DU ALLEREDE HAR
-            </p>
-            <h1 id="hero-title">
-              Hva har du
-              <br />
-              egentlig i<br />
-              <span>fryseboksen?</span>
-            </h1>
-            <p className="hero-intro">
-              En enkel oversikt over maten du har.
-              <br />
-              Og en liten hjelp til å huske den.
-            </p>
-            <div className="hero-actions">
-              <Link href="/app" className="button">
-                Prøv demoen <ArrowUpRight size={18} />
-              </Link>
-              <a href="#slik-fungerer-det" className="text-button">
-                Se hvordan <ArrowDown size={16} />
-              </a>
-            </div>
-            <p className="hero-footnote">Gratis å prøve. Ingen innlogging.</p>
-          </div>
-          <div className="hero-art">
-            <div className="hero-art-label">FRYSEBOKSEN, SETT MED NYE ØYNE</div>
-            <SceneMedia media={sceneMedia.closed} priority />
-            <div className="hero-art-caption">
-              <span>Det finnes mye godt her.</span>
-              <span>Vi hjelper deg å huske det.</span>
-            </div>
-          </div>
-        </section>
-        <div className="hero-bottom">
-          <span>En liten vane. En bedre oversikt.</span>
-          <a href="#slik-fungerer-det" aria-label="Fortsett til historien">
-            <ArrowDown size={19} />
-          </a>
-          <span>UTFORSK FRYSEBOKSEN</span>
-        </div>
         <FreezerStory />
         <section className="product-section" aria-labelledby="product-heading">
           <div className="product-copy">

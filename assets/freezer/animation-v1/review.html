@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="nb">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Fryseboksen – åpneanimasjon</title>
+    <style>
+      @font-face {
+        font-family: Instrument;
+        src: url("fonts/instrument-sans-medium.ttf");
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f3f5f4;
+        color: #20323a;
+        font-family: Instrument, system-ui, sans-serif;
+      }
+      main {
+        width: min(100% - 40px, 760px);
+        margin: 36px auto;
+      }
+      h1 {
+        font-size: clamp(24px, 5vw, 36px);
+        font-weight: 500;
+        letter-spacing: -0.035em;
+        margin: 0 0 8px;
+      }
+      p {
+        color: #50666c;
+        line-height: 1.6;
+      }
+      video {
+        width: min(100%, max(320px, calc(100dvh - 270px)));
+        margin-inline: auto;
+        aspect-ratio: 1;
+        display: block;
+        background: #e4e7e5;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 20px 0;
+      }
+      button,
+      select {
+        font: inherit;
+        min-height: 44px;
+        padding: 10px 16px;
+        border: 1px solid #bfcacb;
+        border-radius: 3px;
+        background: white;
+        color: #20323a;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:first-child {
+        background: #20323a;
+        color: white;
+      }
+      :focus-visible {
+        outline: 3px solid #335d6b;
+        outline-offset: 4px;
+      }
+      a {
+        color: #335d6b;
+        text-underline-offset: 4px;
+      }
+      .files {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-size: 14px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Fra fryseboks til oversikt.</h1>
+      <p>Hero-vinkelen, et lokk som åpner seg og en rolig bevegelse inn mot maten.</p>
+      <video
+        id="opening"
+        controls
+        playsinline
+        preload="metadata"
+        poster="poster-hero.webp"
+        aria-label="Åpneanimasjon av fryseboksen med spørsmålstegn over maten"
+      >
+        <source src="fryseboksen-opening-questions.mp4" type="video/mp4" />
+        <source src="fryseboksen-opening-questions.webm" type="video/webm" />
+        Nettleseren støtter ikke video. Bruk nedlastingslenkene nedenfor.
+      </video>
+      <div class="controls">
+        <button id="replay" type="button">Spill fra starten</button>
+        <label
+          >Variant
+          <select id="variant">
+            <option value="questions">Med spørsmålstegn</option>
+            <option value="clean">Uten grafikk</option>
+          </select></label
+        >
+      </div>
+      <p>
+        4 sekunder · 1080 × 1080 · 24 bilder per sekund · uten lyd. Filmen starter bare når du
+        velger å spille den.
+      </p>
+      <div class="files">
+        <a href="fryseboksen-opening-questions.mp4" download>MP4 med spørsmålstegn</a>
+        <a href="fryseboksen-opening-questions.webm" download>WebM med spørsmålstegn</a>
+        <a href="fryseboksen-opening-clean.mp4" download>Ren MP4</a>
+        <a href="storyboard.jpg">Se bildesekvensen</a>
+      </div>
+    </main>
+    <script>
+      const video = document.getElementById("opening");
+      document.getElementById("replay").addEventListener("click", () => {
+        video.currentTime = 0;
+        video.play();
+      });
+      document.getElementById("variant").addEventListener("change", (event) => {
+        video.pause();
+        video.setAttribute(
+          "aria-label",
+          event.target.value === "questions"
+            ? "Åpneanimasjon av fryseboksen med spørsmålstegn over maten"
+            : "Åpneanimasjon av fryseboksen uten grafikk",
+        );
+        video.querySelectorAll("source").forEach((source) => {
+          const extension = source.type === "video/mp4" ? "mp4" : "webm";
+          source.src = `fryseboksen-opening-${event.target.value}.${extension}`;
+        });
+        video.load();
+      });
+    </script>
+  </body>
+</html>
