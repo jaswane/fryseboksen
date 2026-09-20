@@ -56,7 +56,7 @@ src/components/story/          Scroll-historie, mediekontrakt og mobilillustrasj
 src/components/ui/             Tilgjengelig dialog
 src/features/inventory/        Domene, adapterkontrakt, lokal adapter og app
 src/features/inventory/components/  Legg til, samlet varelinje og Rediger
-public/media/freezer-scroll/   Transparent scrollsekvens, desktop og mobil
+public/media/freezer-scroll-v3/  Ny visuell scrollrevisjon, desktop og mobil
 assets/freezer/                Blender-modell, render-/eksportskript og medierevisjoner
 public/licenses/               Fontlisenser
 tests/e2e/                     Nettlesertester av produktflyter og tilgjengelighet
@@ -74,4 +74,4 @@ Start videre integrasjon i `src/features/inventory/adapter.ts` og les arkitektur
 
 ## Leveransegrenser
 
-Ikke push eller deploy uten en ny instruksjon. Ekte autentisering og backend er senere arbeid. Landingssiden har nå en lokal Blender-basert scrollsekvens; se mediearkitekturen og `assets/freezer/scroll-v2/README.md`. Kontaktadressen hører kun til hovedinnholdet på kontaktsiden og skal aldri gjentas i globale komponenter, metadata eller schema.
+Ikke push eller deploy uten en ny instruksjon. Ekte autentisering og backend er senere arbeid. Landingssiden har en lokal Blender-basert scrollsekvens; se mediearkitekturen og `assets/freezer/scroll-v3/README.md`. V3, språkendringene og de eksterne annotasjonene er godkjent som én lokal baseline 20. september 2026; V2-baseline er bevart i historikken. Smal mobil kombinert med 200 % tekst er fortsatt et eksplisitt restpunkt for en senere frontend/QA-sprint, se `docs/qa.md`. Kontaktadressen hører kun til hovedinnholdet på kontaktsiden og skal aldri gjentas i globale komponenter, metadata eller schema.

@@ -24,12 +24,18 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
+  container-type: inline-size;
 }
 .scroll-frame {
   display: block;
   width: 100%;
   height: auto;
   object-fit: contain;
+}
+.scroll-reveal {
+  position: absolute;
+  inset: 0;
+  clip-path: var(--reveal-clip);
 }
 .journey-copy {
   position: relative;
@@ -111,65 +117,196 @@
 .scroll-labels {
   position: absolute;
   inset: 0;
+  pointer-events: none;
+}
+.annotation-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: #71888d;
+  stroke-width: 0.8px;
+  stroke-opacity: 0.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.annotation-lines-compact,
+.annotation-berries-narrow,
+.annotation-oldest-below {
+  display: none;
 }
 .scroll-labels .food-label {
-  left: var(--marker-x);
-  transform: translate(-50%, calc(-100% - 20px));
-  transition: opacity 0.18s;
+  left: var(--label-x);
+  top: var(--label-y);
+  transform: translate(-100%, -50%);
+  min-width: 0;
+  min-height: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transition: none;
+  text-align: right;
+  display: grid;
+  align-items: center;
+  justify-items: end;
 }
-.scroll-labels .food-label::after {
-  height: 20px;
+.scroll-labels .food-label-berries {
+  transform: translate(0, -50%);
+  text-align: left;
+  justify-items: start;
+}
+.scroll-labels .food-label::after,
+.scroll-labels .known::after,
+.scroll-labels .oldest-label::after {
+  display: none;
+}
+.scroll-labels .unknown,
+.scroll-labels .known {
+  display: block;
+  grid-area: 1 / 1;
+  padding: 0;
+  min-width: 0;
+  width: max-content;
+  color: #172125;
+  text-shadow: none;
 }
 .scroll-labels .unknown {
-  display: block;
+  font-size: clamp(2.4rem, 3.7cqw, 3.6rem);
+  line-height: 1;
+  font-weight: 500;
 }
-.scroll-labels .known {
-  display: none;
+.scroll-labels .known strong {
+  font-size: clamp(0.85rem, 1.25cqw, 1.1rem);
+  font-weight: 500;
 }
 .scroll-labels.stage-0 {
   visibility: hidden;
 }
-.scroll-labels.stage-1 .food-label,
-.scroll-labels.stage-2 .food-label {
-  opacity: 1;
-}
-.scroll-labels.stage-1 .unknown {
-  display: block;
-}
-.scroll-labels.stage-1 .known {
-  display: none;
-}
-.scroll-labels.stage-2 .unknown {
-  display: none;
-}
-.scroll-labels.stage-2 .known {
-  display: block;
-}
-.scroll-labels.stage-3 .food-label {
-  opacity: 0;
+.scroll-labels.stage-3 .food-label,
+.scroll-labels.stage-3 .annotation-food-lines {
+  visibility: hidden;
 }
 .scroll-labels .oldest-label {
-  left: var(--marker-x);
-  top: auto;
-  transform: translate(-50%, calc(-100% - 22px));
+  left: 50.5%;
+  top: 35%;
+  transform: translate(-100%, -50%);
+  width: max-content;
+  max-width: 30%;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  text-shadow: none;
+  transition: none;
   opacity: 0;
+}
+.scroll-labels .oldest-label span,
+.scroll-labels .oldest-label small {
+  color: #3e555d;
+}
+.scroll-labels .oldest-label span {
+  font-size: 0.65rem;
+}
+.scroll-labels .oldest-label strong {
+  font-size: 1.1rem;
+}
+.scroll-labels .oldest-label small {
+  font-size: 0.75rem;
+}
+.annotation-oldest-line {
+  visibility: hidden;
 }
 .scroll-labels.stage-3 .oldest-label {
   opacity: 1;
 }
-.scroll-labels.stage-2 .oldest-label {
-  opacity: 0;
+.scroll-labels.stage-3 .annotation-oldest-line {
+  visibility: visible;
+}
+
+/* Below the product when a narrow media field or enlarged text closes the side gap. */
+@container (max-width: 65rem) {
+  .scroll-labels .food-label-berries {
+    left: auto;
+    right: 1%;
+  }
+  .annotation-berries-wide {
+    display: none;
+  }
+  .annotation-berries-narrow {
+    display: block;
+  }
+  .scroll-labels .oldest-label {
+    left: 72.5%;
+    top: 94%;
+    transform: translate(-50%, 0);
+    max-width: 46%;
+  }
+  .annotation-oldest-side {
+    display: none;
+  }
+  .annotation-oldest-below {
+    display: block;
+  }
+}
+
+/* Square media share one compact annotation layout, also without JavaScript. */
+.journey-static .annotation-lines-wide {
+  display: none;
+}
+.journey-static .annotation-lines-compact {
+  display: block;
+}
+.journey-static .scroll-labels .food-label {
+  left: var(--compact-label-x);
+  right: auto;
+  top: var(--compact-label-y);
+  transform: translate(0, -50%);
+  text-align: left;
+  justify-items: start;
+}
+.journey-static .scroll-labels .food-label-berries {
+  transform: translate(-100%, -50%);
+  text-align: right;
+  justify-items: end;
+}
+.journey-static .scroll-labels .oldest-label {
+  left: 16%;
+  top: calc(100% + 1rem);
+  transform: none;
+  max-width: 82%;
+}
+.journey-static {
+  padding-bottom: 4.5rem;
+}
+@container (max-width: 22rem) {
+  .food-label-lasagne,
+  .annotation-line-lasagne {
+    display: none !important;
+  }
 }
 @media (max-width: 760px) {
+  .scroll-reveal {
+    clip-path: var(--mobile-reveal-clip);
+  }
   .journey-stage {
-    height: 44svh;
-    margin-bottom: -44svh;
-    align-items: center;
+    height: calc(44svh + 4.5rem);
+    margin-bottom: calc(-44svh - 4.5rem);
+    align-items: flex-start;
     z-index: 2;
     background: #e8efee;
   }
   .journey-media {
     width: min(100%, 44svh);
+    padding-bottom: 4.5rem;
+  }
+  .annotation-lines-wide {
+    display: none;
+  }
+  .annotation-lines-compact {
+    display: block;
   }
   .scroll-freezer {
     aspect-ratio: 1;
@@ -184,7 +321,7 @@
   .journey-section {
     min-height: 105svh;
     display: block;
-    padding: calc(44svh + 28px) var(--page-gutter) 50px;
+    padding: calc(44svh + 4.5rem + 28px) var(--page-gutter) 50px;
   }
   .journey-text {
     width: 100%;
@@ -216,18 +353,36 @@
   .journey-scroll-note {
     margin-top: 22px;
   }
-  .scroll-labels .food-label,
-  .scroll-labels .oldest-label {
-    left: var(--mobile-x);
+  .scroll-labels .food-label {
+    left: var(--compact-label-x);
+    right: auto;
+    top: var(--compact-label-y);
+    transform: translate(0, -50%);
+    text-align: left;
+    justify-items: start;
+  }
+  .scroll-labels .food-label-berries {
+    transform: translate(-100%, -50%);
+    text-align: right;
+    justify-items: end;
+  }
+  .scroll-labels .unknown {
+    font-size: 2.4rem;
+  }
+  .scroll-labels .known strong {
+    font-size: 0.85rem;
   }
   .scroll-labels .oldest-label {
-    padding: 12px;
+    left: 16%;
+    top: calc(100% + 1rem);
+    transform: none;
+    max-width: 82%;
   }
   .scroll-labels .oldest-label strong {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
   .scroll-labels .oldest-label small {
-    font-size: 0.62rem;
+    font-size: 0.7rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -244,16 +399,12 @@
   }
   .journey-static .scroll-freezer {
     aspect-ratio: 1;
-    overflow: hidden;
+    overflow: visible;
   }
   .journey-static .scroll-frame {
     width: 177.777%;
     max-width: none;
     margin-left: -77.777%;
-  }
-  .journey-static .scroll-labels .food-label,
-  .journey-static .scroll-labels .oldest-label {
-    left: var(--mobile-x);
   }
 }
 @media (prefers-reduced-motion: reduce) and (max-width: 760px) {

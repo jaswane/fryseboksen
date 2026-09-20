@@ -21,3 +21,17 @@ assets/freezer/scroll-v2/preview-frames
 src/components/story/scroll-anchors.json
 assets/freezer/scroll-v2/timeline.json
 assets/freezer/scroll-v2/validation.json
+assets/freezer/scroll-v3/frames
+assets/freezer/scroll-v3/preview-frames
+assets/freezer/scroll-v3/preview-web
+assets/freezer/scroll-v3/sticker-frames
+assets/freezer/scroll-v3/sticker-placement.json
+assets/freezer/scroll-v3/model-validation.json
+assets/freezer/scroll-v3/timeline.json
+assets/freezer/scroll-v3/validation.json
+src/components/story/scroll-reveal-mask.json
+# Machine-written validation reports; keep their reproducible serializer output.
+assets/freezer/model-validation.json
+assets/freezer/animation-v1/video-validation.json
+assets/freezer/stills-v1/asset-validation.json
+assets/freezer/stills-v2/asset-validation.json

@@ -1,18 +1,34 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import anchors from "./scroll-anchors.json";
+import revealMask from "./scroll-reveal-mask.json";
 import { scrollMedia } from "./media-config";
+import { StoryAnnotations } from "./story-annotations";
 
-const path = (frame: number, mobile = false) =>
-  `${scrollMedia.basePath}/${String(frame).padStart(4, "0")}${mobile ? "-mobile" : ""}.webp`;
+const path = (frame: number, mobile = false, known = false) =>
+  `${scrollMedia.basePath}/${String(frame).padStart(4, "0")}${known ? "-known" : ""}${mobile ? "-mobile" : ""}.webp`;
 
-function Frame({ frame, eager = false }: { frame: number; eager?: boolean }) {
+const revealClip = (mobile = false) =>
+  `polygon(${revealMask.map(([x, y]) => `${(mobile ? (x - scrollMedia.mobile.cropLeft) / (1 - scrollMedia.mobile.cropLeft) : x) * 100}% ${y * 100}%`).join(",")})`;
+const revealStyle = {
+  "--reveal-clip": revealClip(),
+  "--mobile-reveal-clip": revealClip(true),
+} as CSSProperties;
+
+function Frame({
+  frame,
+  eager = false,
+  known = false,
+}: {
+  frame: number;
+  eager?: boolean;
+  known?: boolean;
+}) {
   return (
     <picture>
-      <source media="(max-width: 760px)" srcSet={path(frame, true)} />
+      <source media="(max-width: 760px)" srcSet={path(frame, true, known)} />
       <Image
-        src={path(frame)}
+        src={path(frame, false, known)}
         alt="Hvit fryseboks med to kurver og innpakket mat."
         width={scrollMedia.desktop.width}
         height={scrollMedia.desktop.height}
@@ -25,61 +41,35 @@ function Frame({ frame, eager = false }: { frame: number; eager?: boolean }) {
   );
 }
 
-function Labels({ frame, stage }: { frame: number; stage: number }) {
-  const points = anchors[frame - 1];
-  const position = (point: number[]): CSSProperties =>
-    ({
-      "--marker-x": `${point[0] * 100}%`,
-      "--mobile-x": `${((point[0] - scrollMedia.mobile.cropLeft) / (1 - scrollMedia.mobile.cropLeft)) * 100}%`,
-      top: `${point[1] * 100}%`,
-    }) as CSSProperties;
-  return (
-    <div className={`scroll-labels stage-${stage}`} aria-hidden="true">
-      {Object.entries(points).map(([name, point]) => (
-        <div
-          key={name}
-          className="food-label"
-          style={{
-            ...position(point),
-            opacity: stage === 2 ? Math.max(0, 1 - (frame - scrollMedia.openFrame) / 8) : undefined,
-          }}
-        >
-          <span className="unknown">?</span>
-          <span className="known">
-            <strong>{{ beef: "Kjøttdeig", berries: "Blåbær", lasagne: "Lasagne" }[name]}</strong>
-            <small>{{ beef: "3 pakker", berries: "1 boks", lasagne: "1 form" }[name]}</small>
-          </span>
-        </div>
-      ))}
-      <div className="oldest-label" style={position(points.beef)}>
-        <span>BRUK DETTE FØRST</span>
-        <strong>Kjøttdeig</strong>
-        <small>Innfrysingsdato: 12. januar</small>
-      </div>
-    </div>
-  );
-}
-
 export function StillFreezer({ frame, stage }: { frame: number; stage: number }) {
   return (
     <div className="scroll-freezer">
-      <Frame frame={frame} />
-      <Labels frame={frame} stage={stage} />
+      <Frame frame={frame} known={frame === scrollMedia.openFrame && stage >= 2} />
+      <StoryAnnotations frame={frame} stage={stage} />
     </div>
   );
 }
 
 /** Alpha WebP frames: scroll can run in either direction without video seek lag. */
-export function SceneMedia({ frame, stage }: { frame: number; stage: number }) {
+export function SceneMedia({
+  frame,
+  stage,
+  reveal,
+}: {
+  frame: number;
+  stage: number;
+  reveal: number;
+}) {
   const [shown, setShown] = useState(1);
+  const [knownReady, setKnownReady] = useState(false);
   const cache = useRef(new Map<string, Promise<void>>());
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (motion.matches) return;
     let cancelled = false;
     const mobile = window.matchMedia("(max-width: 760px)").matches;
-    const load = (index: number) => {
-      const url = path(index, mobile);
+    const load = (index: number, known = false) => {
+      const url = path(index, mobile, known);
       const cached = cache.current.get(url);
       if (cached) return cached;
       const promise = new Promise<void>((resolve, reject) => {
@@ -99,6 +89,13 @@ export function SceneMedia({ frame, stage }: { frame: number; stage: number }) {
       .then(() => {
         if (cancelled || motion.matches) return;
         setShown(frame);
+        if (frame === scrollMedia.openFrame) {
+          void load(frame, true)
+            .then(() => {
+              if (!cancelled && !motion.matches) setKnownReady(true);
+            })
+            .catch(() => {});
+        }
         for (const nearby of [frame - 1, frame + 1]) {
           if (nearby >= 1 && nearby <= scrollMedia.frameCount) void load(nearby).catch(() => {});
         }
@@ -110,10 +107,29 @@ export function SceneMedia({ frame, stage }: { frame: number; stage: number }) {
       cancelled = true;
     };
   }, [frame]);
+  // The alternate render is exactly frame 49 with different food materials.
+  // Hold this camera through 02–03; reveal reverses with the scroll position.
+  const visibleReveal =
+    shown > scrollMedia.openFrame ? 1 : knownReady && shown === scrollMedia.openFrame ? reveal : 0;
   return (
-    <div className="scroll-freezer" data-frame={shown} data-target-frame={frame} data-stage={stage}>
+    <div
+      className="scroll-freezer"
+      data-frame={shown}
+      data-target-frame={frame}
+      data-stage={stage}
+      data-reveal={visibleReveal}
+    >
       <Frame frame={shown} eager />
-      <Labels frame={shown} stage={shown < 45 ? 0 : stage} />
+      {shown === scrollMedia.openFrame && knownReady && (
+        <div className="scroll-reveal" style={{ ...revealStyle, opacity: visibleReveal }}>
+          <Frame frame={scrollMedia.openFrame} known eager />
+        </div>
+      )}
+      <StoryAnnotations
+        frame={shown}
+        stage={shown < 45 ? 0 : stage === 2 && visibleReveal < 1 ? 1 : stage}
+        reveal={visibleReveal}
+      />
     </div>
   );
 }

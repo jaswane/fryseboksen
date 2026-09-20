@@ -31,7 +31,7 @@ export default function HomePage() {
               </div>
               <div>
                 <span>02</span>
-                <p>Velg antall. Datoen er klar.</p>
+                <p>Velg antall. Datoen fylles inn automatisk.</p>
               </div>
               <div>
                 <span>03</span>
@@ -65,7 +65,7 @@ export default function HomePage() {
               påminnelse.
             </h2>
             <p>
-              Et lite blikk i fryseren, rett i innboksen.
+              Et lite blikk i fryseren – rett i innboksen.
               <br />
               Månedlig, ukentlig eller aldri. Du velger.
             </p>
@@ -88,7 +88,7 @@ export default function HomePage() {
                 <br />
                 og venter.
               </h3>
-              <p>Kanskje det er på tide å ta en titt på kjøttdeigen eller laksen?</p>
+              <p>Kanskje det er på tide å bruke kjøttdeigen eller laksen?</p>
               <span className="reminder-link">
                 Se hva du har <ArrowUpRight size={16} />
               </span>
@@ -114,7 +114,7 @@ export default function HomePage() {
             Bare det neste du legger i fryseren.
           </p>
           <Link href="/app" className="button">
-            Få en følelse av det <ArrowUpRight size={18} />
+            Prøv det selv <ArrowUpRight size={18} />
           </Link>
           <Link href="/guider" className="final-guide-link">
             Små råd for en ryddigere fryser <ArrowRight size={16} />

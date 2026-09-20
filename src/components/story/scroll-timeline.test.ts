@@ -9,10 +9,16 @@ describe("the freezer story follows the reader's scroll position", () => {
     expect(scrollTimeline(425, stops).frame).toBe(25);
     expect(scrollTimeline(850, stops).frame).toBe(49);
   });
-  it("keeps the same camera from point 2 into point 3; only labels change", () => {
-    expect(scrollTimeline(1000, stops)).toEqual({ frame: 49, stage: 1 });
-    expect(scrollTimeline(2000, stops)).toEqual({ frame: 49, stage: 2 });
-    expect(scrollTimeline(2100, stops)).toEqual({ frame: 49, stage: 2 });
+  it("reveals the same food between points 2 and 3 without moving the camera", () => {
+    expect(scrollTimeline(1000, stops)).toEqual({ frame: 49, stage: 1, reveal: 0 });
+    expect(scrollTimeline(1575, stops)).toEqual({ frame: 49, stage: 1, reveal: 0.5 });
+    expect(scrollTimeline(2000, stops)).toEqual({ frame: 49, stage: 2, reveal: 1 });
+    expect(scrollTimeline(2100, stops)).toEqual({ frame: 49, stage: 2, reveal: 1 });
+    const positions = [1000, 1500, 1600, 2000];
+    const forward = positions.map((position) => scrollTimeline(position, stops));
+    expect(positions.toReversed().map((position) => scrollTimeline(position, stops))).toEqual(
+      forward.toReversed(),
+    );
   });
   it("faces forward at point 4 and yields the same frame on return", () => {
     const positions = [0, 425, 850, 2000, 2475, 3000];

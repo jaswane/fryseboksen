@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "unchanged_freezer_geometry_objects": 159,
+  "geometry_sha256": "ec9b76581bec257453f209059239092a98b54e880508bef5af8d2ec7a460f938",
+  "closed_dimensions_m": [
+    0.8500000238418579,
+    0.5600000023841858,
+    0.7699999809265137
+  ],
+  "baskets": 2,
+  "studio_lights_unchanged": 3,
+  "ao_nodes": 4,
+  "camera_type": "PERSP",
+  "lens_mm": 52,
+  "sticker_embedded_in_complete_model": true,
+  "reveal_keeps_all_object_and_camera_poses": true
+}

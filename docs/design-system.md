@@ -44,3 +44,19 @@ Pluss/minus har eksplisitte tilgjengelige navn. Hjelpeteksten sier at minus tar 
 ## Illustrasjoner
 
 Blender-modellen brukes konsekvent gjennom en transparent 16:9-sekvens. Hele lokket skal være innenfor bildekanten i samtlige posisjoner. Mobil bruker eget kvadratisk utsnitt av samme rendering. Posene og beholderne er umerkede og gjennomsiktige nok til at matvarene kan gjenkjennes. Prerendrede bilder styres av scroll etter brukerens revisjon 20. september; stillbilder brukes ved redusert bevegelse. Dette er fortsatt lokal medieproduksjon for prototypen.
+
+### Visuell revisjon V3, godkjent 20. september 2026
+
+Ukjent innhold får lyse, dempede materialer med samme silhuetter og plassering som den fargede versjonen. Fargene kommer tilbake mellom punkt 2 og 3, mens kameraet står stille. Dette er en visuell metafor for registrert oversikt, ikke automatisk matgjenkjenning.
+
+Oppbevaringsbokser har svakt skrånende vegger, avrundede hjørner, et tydelig lukket lokk og små låseklips. Materialet er hverdagslig transparent plast. Kjølig lys, frysermodell og hovedkomposisjon følger godkjent baseline.
+
+Spørsmålstegn bruker grafitt #172125, større skrift og ingen bakgrunn, kant eller skyggekort. Matetikettene viser bare varenavn med tynne forbindelseslinjer; antall finnes fortsatt i teksten og appen. Plasseringene følger annotasjonsrevisjonen nedenfor.
+
+Klistremerket er en diskret produktdetalj øverst til høyre på fronten, med plassering etter brukerens referanse. Det følger perspektiv og lys gjennom hele sekvensen. Merket er 12 × 14 cm og bruker samme kubeikon, Instrument Sans og grafitt/blågrå palett som nettsiden.
+
+### Eksterne annotasjoner, godkjent 20. september 2026
+
+Scene 2 og 3 bruker tre faste tekstposisjoner utenfor produktet: kjøttdeig og lasagne i luftrommet til venstre, blåbær til høyre. Spørsmålstegn og varenavn deler samme plass i et CSS-grid, slik at overgangen ikke flytter teksten. SVG-linjene er 0,8 px, dempet blågrå og uten pilspisser. Endepunktene bruker de eksisterende Blender-ankrene for riktig vare. Kamera, produktstørrelse, venstre tekstkolonne og alle V3-medier er uendret.
+
+Scene 4 viser prioritering og dato ved siden av fryseren, uten boks. På smalere bildefelt eller ved stor tekst ligger den under produktet. Mobil bruker egne korte linjer og to annotasjoner når bildefeltet er under 22 rem; ellers vises tre. En reservert rad på 4,5 rem under mobilbildet gir plass til prioriteringen uten å dekke lokket eller fortellerteksten. Samme kompakte system brukes i de statiske reservevisningene.

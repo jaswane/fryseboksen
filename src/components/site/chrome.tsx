@@ -60,8 +60,7 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="footer-bottom">
-        <span>Et prosjekt fra Swane Creative</span>
-        <span>Laget for fryseren din.</span>
+        <a href="https://www.swanecreative.no/">Et prosjekt fra Swane Creative</a>
       </div>
     </footer>
   );

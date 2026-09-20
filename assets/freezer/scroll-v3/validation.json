@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "camera_frames": 73,
+  "source_renders": 74,
+  "web_exports": 148,
+  "source_size": [
+    1920,
+    1080
+  ],
+  "desktop_size": [
+    1440,
+    810
+  ],
+  "mobile_size": [
+    810,
+    810
+  ],
+  "total_web_bytes": 6030470,
+  "max_camera_step_m": 0.14771277666933835,
+  "all_product_bounds_inside_frame": true,
+  "all_frames_have_alpha": true,
+  "minimum_top_margin": 0.04250001907348633,
+  "minimum_bottom_margin": 0.08249997347593307,
+  "lid_open_from_frame": 49,
+  "lid_degrees_open": 95,
+  "scene_2_and_3_camera_frame": 49,
+  "scene_2_and_3_elevation": 58,
+  "scene_4_elevation": 63,
+  "opening_camera_matches_approved_v2": true,
+  "sticker_passes": 73,
+  "sticker_size_m": [
+    0.12,
+    0.14
+  ],
+  "sticker_in_all_camera_views": true,
+  "unknown_cavity_chroma": 4.361134909495251,
+  "known_cavity_chroma": 23.815991906523998,
+  "silhouette_changed_fraction": 0.0
+}

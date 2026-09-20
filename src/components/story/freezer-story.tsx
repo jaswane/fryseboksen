@@ -29,7 +29,7 @@ const scenes = [
         Det har vi jo.
       </>
     ),
-    body: "Et navn. Et antall. En liten oversikt over det som allerede finnes hjemme hos deg.",
+    body: "Et navn. Et antall. En enkel oversikt over det du allerede har hjemme.",
     note: "Kjøttdeig · 3 pakker",
   },
   {
@@ -42,14 +42,14 @@ const scenes = [
         Helt enkelt.
       </>
     ),
-    body: "Se hvilke varer som har den eldste registrerte innfrysingsdatoen. Kanskje middagen allerede ligger klar.",
+    body: "Se hvilke varer som har den eldste registrerte innfrysingsdatoen. Kanskje middagen allerede ligger i fryseren.",
     note: "En prioritering, ikke en utløpsdato.",
   },
 ];
 
 export function FreezerStory() {
   const root = useRef<HTMLDivElement>(null);
-  const [view, setView] = useState({ frame: 1, stage: 0 });
+  const [view, setView] = useState({ frame: 1, stage: 0, reveal: 0 });
   useEffect(() => {
     const element = root.current!;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -67,7 +67,11 @@ export function FreezerStory() {
         viewport: innerHeight,
       });
       setView((previous) =>
-        previous.frame === next.frame && previous.stage === next.stage ? previous : next,
+        previous.frame === next.frame &&
+        previous.stage === next.stage &&
+        previous.reveal === next.reveal
+          ? previous
+          : next,
       );
     };
     const schedule = () => {
@@ -90,11 +94,11 @@ export function FreezerStory() {
   return (
     <div ref={root} className="freezer-journey">
       <noscript>
-        <style>{`.journey-stage,.journey-scroll-note{display:none}.journey-static{display:block;width:57%}.journey-section{min-height:75svh}.journey-static .scroll-freezer{aspect-ratio:1;overflow:hidden}.journey-static .scroll-frame{width:177.777%;max-width:none;margin-left:-77.777%}.journey-static .food-label,.journey-static .oldest-label{left:var(--mobile-x)}@media(max-width:760px){.journey-section{padding-top:38px;min-height:auto}.journey-static{width:100%;margin-top:24px}.journey-static .scroll-frame{width:100%;margin:0}}`}</style>
+        <style>{`.journey-stage,.journey-scroll-note{display:none}.journey-static{display:block;width:57%}.journey-section{min-height:75svh}.journey-static .scroll-freezer{aspect-ratio:1;overflow:visible}.journey-static .scroll-frame{width:177.777%;max-width:none;margin-left:-77.777%}@media(max-width:760px){.journey-section{padding-top:38px;min-height:auto}.journey-static{width:100%;margin-top:24px}.journey-static .scroll-frame{width:100%;margin:0}}`}</style>
       </noscript>
       <div className="journey-stage" aria-hidden="true">
         <div className="journey-media">
-          <SceneMedia frame={view.frame} stage={view.stage} />
+          <SceneMedia frame={view.frame} stage={view.stage} reveal={view.reveal} />
         </div>
         <span className="journey-art-label">FRYSEBOKSEN, SETT MED NYE ØYNE</span>
         <div className="journey-progress">
@@ -120,19 +124,19 @@ export function FreezerStory() {
             <p className="hero-intro">
               En enkel oversikt over maten du har.
               <br />
-              Og en liten hjelp til å huske den.
+              Så slipper du å lure på hva som ligger der.
             </p>
             <div className="hero-actions">
               <Link href="/app" className="button">
                 Prøv demoen <ArrowUpRight size={18} />
               </Link>
               <a href="#slik-fungerer-det" className="text-button">
-                Se hvordan <ArrowDown size={16} />
+                Se hvordan det fungerer <ArrowDown size={16} />
               </a>
             </div>
             <p className="hero-footnote">Gratis å prøve. Ingen innlogging.</p>
             <p className="journey-scroll-note">
-              Scroll og ta en titt <ArrowDown size={14} />
+              Bla ned og ta en titt <ArrowDown size={14} />
             </p>
           </div>
           <div className="journey-static">

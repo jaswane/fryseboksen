@@ -13,6 +13,9 @@ export function scrollTimeline(position: number, stops: ScrollStops) {
   const turnEnd = Math.max(turnStart + 1, stops.fourth - stops.viewport * 0.15);
   const opening = clamp(position / openEnd);
   const turning = clamp((position - turnStart) / (turnEnd - turnStart));
+  const revealStart = stops.second + stops.viewport * 0.35;
+  const revealEnd = Math.max(revealStart + 1, stops.third - stops.viewport * 0.2);
+  const reveal = clamp((position - revealStart) / (revealEnd - revealStart));
   const frame =
     opening < 1
       ? 1 + Math.round(opening * (scrollMedia.openFrame - 1))
@@ -26,5 +29,5 @@ export function scrollTimeline(position: number, stops: ScrollStops) {
         : opening >= 0.9
           ? 1
           : 0;
-  return { frame, stage };
+  return { frame, stage, reveal };
 }
