@@ -6,7 +6,9 @@ export interface EntryCorrection {
   frozenOn: string;
   expectedVersion: number;
 }
-export type InventoryCommand =
+
+/** What the interface produces. The adapter adds an identity for safe retries. */
+export type InventoryCommandInput =
   | { type: "add"; freezerId: string; name: string; quantity: number; unit: Unit; frozenOn: string }
   | { type: "add-one"; freezerId: string; itemKey: string }
   | { type: "take-one"; freezerId: string; itemKey: string }
@@ -20,6 +22,12 @@ export type InventoryCommand =
     }
   | { type: "delete"; freezerId: string; itemKey: string }
   | { type: "rename-freezer"; freezerId: string; name: string };
+
+/**
+ * `requestId` identifies one user action. Repeating it must repeat the answer,
+ * never the effect: plus and minus are not idempotent on their own.
+ */
+export type InventoryCommand = InventoryCommandInput & { requestId: string };
 
 export interface UndoReceipt {
   id: string;

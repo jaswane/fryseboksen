@@ -45,10 +45,17 @@ export function InventoryApp({
   adapter,
   initialFreezerId,
   demo,
+  account,
 }: {
   adapter: InventoryAdapter;
   initialFreezerId: string;
   demo?: { choices: { id: string; label: string }[]; reset: () => Promise<void> };
+  /**
+   * Replaces the header link for a signed-in app, where reaching the account
+   * matters more than reaching the front page. The brand still links home, so
+   * the header keeps one link either way.
+   */
+  account?: React.ReactNode;
 }) {
   const inventory = useInventory(adapter, initialFreezerId);
   const [query, setQuery] = useState("");
@@ -75,9 +82,11 @@ export function InventoryApp({
     <div className="app-shell">
       <header className="app-header">
         <Brand />
-        <Link href="/" className="text-button app-home-link">
-          Til forsiden <ArrowUpRight size={16} />
-        </Link>
+        {account ?? (
+          <Link href="/" className="text-button app-home-link">
+            Til forsiden <ArrowUpRight size={16} />
+          </Link>
+        )}
       </header>
       {demo && (
         <div className="demo-bar">

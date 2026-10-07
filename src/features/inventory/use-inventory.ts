@@ -1,6 +1,11 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { InventoryAdapter, InventoryCommand, MutationResult, UndoReceipt } from "./adapter";
+import type {
+  InventoryAdapter,
+  InventoryCommandInput,
+  MutationResult,
+  UndoReceipt,
+} from "./adapter";
 import type { Freezer, InventorySnapshot } from "./domain";
 
 export function useInventory(adapter: InventoryAdapter, initialFreezerId: string) {
@@ -61,6 +66,32 @@ export function useInventory(adapter: InventoryAdapter, initialFreezerId: string
     };
   }, [adapter, initialFreezerId]);
 
+  /**
+   * A second device can change the same freezer. Re-reading on return keeps the
+   * open page close to the server and turns avoidable conflicts into no-ops.
+   * It stays silent: no spinner, no cleared message, no error banner.
+   */
+  useEffect(() => {
+    const refresh = () => {
+      if (lock.current || document.visibilityState !== "visible") return;
+      const ticket = request.current;
+      const id = activeId.current;
+      void adapter
+        .getInventory(id)
+        .then((data) => {
+          if (ticket === request.current && !lock.current && activeId.current === id)
+            setSnapshot(data);
+        })
+        .catch(() => {});
+    };
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refresh);
+    return () => {
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refresh);
+    };
+  }, [adapter]);
+
   const mutate = useCallback(async (action: () => Promise<MutationResult>): Promise<boolean> => {
     if (lock.current) return false;
     lock.current = true;
@@ -96,7 +127,9 @@ export function useInventory(adapter: InventoryAdapter, initialFreezerId: string
     clearNotice: () => setNotice(null),
     clearError: () => setError(""),
     reload: () => load(activeId.current),
-    execute: (command: InventoryCommand) => mutate(() => adapter.execute(command)),
+    // One click is one request id, so a transport-level retry cannot apply twice.
+    execute: (command: InventoryCommandInput) =>
+      mutate(() => adapter.execute({ ...command, requestId: crypto.randomUUID() })),
     undo: () => (notice?.undo ? mutate(() => adapter.undo(notice.undo!)) : Promise.resolve(false)),
   };
 }

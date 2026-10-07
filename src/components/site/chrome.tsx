@@ -32,6 +32,9 @@ export function SiteHeader() {
         <Link href="/guider" className="nav-text">
           Guider
         </Link>
+        <Link href="/logg-inn" className="nav-text">
+          Logg inn
+        </Link>
         <Link href="/app" className="button button-small">
           Prøv demoen <ArrowUpRight size={17} />
         </Link>
@@ -52,6 +55,9 @@ export function SiteFooter() {
           </p>
         </div>
         <nav aria-label="Bunnmeny">
+          {/* Also here because .nav-text is hidden below 760px, and a phone is
+              where most people will be signing in. */}
+          <Link href="/logg-inn">Logg inn</Link>
           <Link href="/guider">Guider</Link>
           <Link href="/om">Om Fryseboksen</Link>
           <Link href="/kontakt">Kontakt</Link>

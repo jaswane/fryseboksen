@@ -18,8 +18,8 @@ export default function ContactPage() {
       </p>
       <p className="contact-email">kontakt@swanecreative.no</p>
       <p className="mt-8">
-        Spørsmål om personvern og opplysninger kan også sendes hit. Demoen har ingen brukerkonto
-        eller sentralt lagret fryserinnhold.
+        Spørsmål om personvern og opplysninger kan også sendes hit. Vil du slette kontoen din, kan
+        du gjøre det selv på kontosiden.
       </p>
     </PublicPage>
   );

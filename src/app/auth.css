@@ -1,0 +1,46 @@
+/* Sign-in, account and confirmation screens.
+   Additive only: same field metrics, colours and spacing as the add panel and
+   the dialog in inventory.css, so nothing in the approved layout changes. */
+
+.auth-form {
+  max-width: 420px;
+  margin: 0;
+}
+.auth-form label {
+  display: block;
+  font-size: 0.79rem;
+  font-weight: 500;
+  color: #415962;
+  margin: 0 0 8px;
+}
+.auth-form input {
+  border: 1px solid #c9d6d8;
+  background: #fcfdfb;
+  height: 47px;
+  padding: 10px 12px;
+  width: 100%;
+  min-width: 0;
+  border-radius: 3px;
+  color: #172125;
+  font-size: 1rem;
+}
+.auth-form .button {
+  margin-top: 22px;
+}
+.account-email {
+  font-size: 1.15rem !important;
+  color: #172125 !important;
+  overflow-wrap: anywhere;
+  border-top: 1px solid #d9e1e3;
+  padding-top: 20px;
+}
+
+@media (max-width: 760px) {
+  .auth-form,
+  .auth-form .button {
+    width: 100%;
+  }
+  .auth-form .button {
+    justify-content: center;
+  }
+}

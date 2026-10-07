@@ -2,6 +2,7 @@
 @import "./site.css";
 @import "./journey.css";
 @import "./inventory.css";
+@import "./auth.css";
 @theme inline {
   --color-ink: #172125;
   --color-muted: #4f6067;

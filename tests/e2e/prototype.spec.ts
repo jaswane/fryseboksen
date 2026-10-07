@@ -181,6 +181,9 @@ test("routes, unique contact address, console and horizontal overflow", async ({
     "/personvern",
     "/vilkar",
     "/design/typografi",
+    "/logg-inn",
+    "/logg-inn/sjekk-e-post",
+    "/auth/feil",
   ]) {
     const response = await page.goto(path);
     expect(response?.status()).toBe(200);

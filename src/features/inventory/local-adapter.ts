@@ -32,8 +32,18 @@ interface Patch {
 const copy = <T>(value: T): T => structuredClone(value);
 const equal = (a: unknown, b: unknown): boolean => JSON.stringify(a) === JSON.stringify(b);
 
+/** Keeps a replay log small without letting it expire while the page is open. */
+function remember<T>(log: Map<string, T>, key: string, value: T): T {
+  log.set(key, value);
+  if (log.size > 50) log.delete(log.keys().next().value!);
+  return value;
+}
+
 export class LocalInventoryAdapter implements InventoryAdapter {
   private receipts = new Map<string, Patch>();
+  /** Replayed answers. A repeated request id must never repeat the effect. */
+  private commands = new Map<string, MutationResult>();
+  private undone = new Map<string, MutationResult>();
   constructor(
     private storage: DemoStorage,
     private clock: () => Date = () => new Date(),
@@ -118,6 +128,8 @@ export class LocalInventoryAdapter implements InventoryAdapter {
   }
 
   async execute(command: InventoryCommand): Promise<MutationResult> {
+    const replay = this.commands.get(command.requestId);
+    if (replay) return copy(replay);
     const state = this.read();
     this.snapshot(state, command.freezerId);
     const previous = copy(state);
@@ -243,16 +255,19 @@ export class LocalInventoryAdapter implements InventoryAdapter {
     };
     this.save(state);
     const id = crypto.randomUUID();
-    this.receipts.set(id, copy(patch));
-    if (this.receipts.size > 30) this.receipts.delete(this.receipts.keys().next().value!);
-    return {
-      snapshot: this.snapshot(state, command.freezerId),
-      message,
-      undo: { id, label: message },
-    };
+    remember(this.receipts, id, copy(patch));
+    return copy(
+      remember(this.commands, command.requestId, {
+        snapshot: this.snapshot(state, command.freezerId),
+        message,
+        undo: { id, label: message },
+      }),
+    );
   }
 
   async undo(receipt: UndoReceipt): Promise<MutationResult> {
+    const replay = this.undone.get(receipt.id);
+    if (replay) return copy(replay);
     const patch = this.receipts.get(receipt.id);
     if (!patch) throw new Error("Denne endringen kan ikke angres lenger.");
     const state = this.read();
@@ -283,15 +298,19 @@ export class LocalInventoryAdapter implements InventoryAdapter {
       );
     this.save(state);
     this.receipts.delete(receipt.id);
-    return {
-      snapshot: this.snapshot(state, patch.freezerId),
-      message: "Endringen er angret.",
-      undo: null,
-    };
+    return copy(
+      remember(this.undone, receipt.id, {
+        snapshot: this.snapshot(state, patch.freezerId),
+        message: "Endringen er angret.",
+        undo: null,
+      }),
+    );
   }
   /** Demo-only control. It is deliberately not part of the production adapter contract. */
   async resetDemo(): Promise<void> {
     this.save(createDemoState(this.clock()));
     this.receipts.clear();
+    this.commands.clear();
+    this.undone.clear();
   }
 }

@@ -20,11 +20,12 @@ export default function AboutPage() {
         Fryseboksen.no er et prosjekt fra Swane Creative. Målet er en enkel, gratis tjeneste for
         norske husholdninger, med mobilopplevelsen først.
       </p>
-      <h2>Dette er en tidlig demo</h2>
+      <h2>Dette er en tidlig versjon</h2>
       <p>
-        Du kan prøve registrering, uttak og redigering med lokale eksempelvarer. Det er ingen konto,
-        og endringene dine blir bare lagret i denne nettleseren. Innlogging og påminnelser kommer
-        senere.
+        Du kan prøve registrering, uttak og redigering med lokale eksempelvarer i{" "}
+        <Link href="/app">demoen</Link>, uten å logge inn. Da lagres endringene bare i denne
+        nettleseren. Vil du ha din egen fryser på tvers av enheter, kan du{" "}
+        <Link href="/logg-inn">logge inn med e-post</Link>. Påminnelser kommer senere.
       </p>
       <p>
         Har du innspill eller spørsmål? <Link href="/kontakt">Du finner oss på kontaktsiden.</Link>
